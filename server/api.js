@@ -1,5 +1,5 @@
 import express from 'express';
-import { addSession, getEvents, getSensor} from './data';
+import { addSession, getEvents, getSensors, getSensor} from './data';
 import uuid from 'uuid';
 
 const router = express.Router();
@@ -21,6 +21,10 @@ router.post('/sessions', (req, res) => {
 
 router.get('/event', (req, res) => {
   getEvents(req.query).then(events => res.json(events));
+});
+
+router.get('/sensor', (req, res) => {
+  getSensors(req.query).then(sensors => res.json(sensors));
 });
 
 router.get('/sensor/:id', (req, res) => {

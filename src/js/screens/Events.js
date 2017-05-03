@@ -6,8 +6,8 @@ import Article from 'grommet/components/Article';
 import Box from 'grommet/components/Box';
 import Header from 'grommet/components/Header';
 import Label from 'grommet/components/Label';
-import List from 'grommet/components/List';
-import ListItem from 'grommet/components/ListItem';
+import Table from 'grommet/components/Table';
+import TableRow from 'grommet/components/TableRow';
 import Tiles from 'grommet/components/Tiles';
 import Notification from 'grommet/components/Notification';
 import Paragraph from 'grommet/components/Paragraph';
@@ -56,19 +56,24 @@ class Events extends Component {
       );
     } else {
       const eventsNode = (events || []).map((event, index) => (
-        <ListItem key={index} justify='between' pad={{ horizontal: 'medium', vertical: 'none', between: 'small' }} separator='none'>
-            <Label margin='none'>{event.eventTime}</Label>
-            <CheckBox checked={event.sensorState == '0' ? false : true} toggle={false} disabled={true} />
-            <Label margin='none'><Anchor path={`/sensor/${event.sensorId}`} label={event.sensorId} /></Label>
-            <Label margin='none'>{event.sensorLat}</Label>
-            <Label margin='none'>{event.sensorLng}</Label>
-        </ListItem>
+        <TableRow key={index} justify='between' pad={{ horizontal: 'medium', vertical: 'none', between: 'small' }} separator='none'>
+            <td><Label margin='none' align='end'>{event.eventTime}</Label></td>
+            <td><CheckBox checked={event.sensorState == '0' ? false : true} toggle={false} disabled={true} /></td>
+            <td><Label margin='none'><Anchor path={`/sensor/${event.sensorId}`} label={event.sensorId} /></Label></td>
+            <td><Label margin='none' align='end'>{event.sensorLat}</Label></td>
+            <td><Label margin='none' align='end'>{event.sensorLng}</Label></td>
+        </TableRow>
       ));
 
       listNode = (
-        <List>
-          {eventsNode}
-        </List>
+        <Table>
+          <thead>
+            <tr><th>Time</th><th>State</th><th>ID</th><th>Lat</th><th>Lng</th></tr>
+          </thead>
+          <tbody>
+            {eventsNode}
+          </tbody>
+        </Table>
       );
     }
 

@@ -3,6 +3,8 @@ module.exports = {
   Dashboard: 'Dashboard',
   Logout: 'Logout',
   Event: 'Event',
+  EventD: 'Events',
   Sensor: 'Sensor',
-  Sensors: 'Sensors'
+  Sensors: 'Sensors',
+  SensorsD: 'Sensors'
 };

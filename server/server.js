@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import api from './api';
-import { addNotifier, getEvents, getSensor } from './data';
+import { addNotifier, getEvents, getSensors, getSensor } from './data';
 import Notifier from './notifier';
 
 const PORT = process.env.PORT || 8102;
@@ -28,6 +28,7 @@ addNotifier(
 );
 
 notifier.use('/api/event', () => getEvents());
+notifier.use('/api/sensor', () => getSensors());
 notifier.use('/api/sensor/:id', param => (
   getSensor(param.id).then((result) => {
     if (!result.sensor) {

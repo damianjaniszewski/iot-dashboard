@@ -19,8 +19,15 @@ var _printError = function (err) {
 };
 
 function _addSensor(sensor) {
+  var index = sensors.findIndex((t) => {
+    if (t.sensorId === sensor.sensorId) {
+      return true;
+    }
+    return false;
+  });
 
-}
+  (index >= 0) ? sensors[index] = sensor : sensors.push(sensor);
+};
 
 var _gotEvent = function (event) {
   console.log('event> '+event.body.sensorId+'.'+event.body.sensorType+' ('+event.body.sensorLat+', '+event.body.sensorLng+'): '+event.body.sensorState);
@@ -72,9 +79,13 @@ export function getEvents(filters) {
   return Promise.resolve({ events });
 }
 
+export function getSensors() {
+  return Promise.resolve({ sensors });
+}
+
 export function getSensor(id) {
   let sensor;
-  events.some((t) => {
+  sensors.some((t) => {
     if (t.sensorId === id) {
       sensor = t;
       return true;
@@ -84,4 +95,4 @@ export function getSensor(id) {
   return Promise.resolve({ sensor });
 }
 
-export default { addNotifier, addSession, getSession, getSensor, getEvents };
+export default { addNotifier, addSession, getSession, getSensors, getSensor, getEvents };

@@ -38,6 +38,12 @@ router.get('/event', function (req, res) {
   });
 });
 
+router.get('/sensor', function (req, res) {
+  (0, _data.getSensors)(req.query).then(function (sensors) {
+    return res.json(sensors);
+  });
+});
+
 router.get('/sensor/:id', function (req, res) {
   (0, _data.getSensor)(req.params.id).then(function (result) {
     if (!result.sensor) {

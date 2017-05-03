@@ -58,6 +58,9 @@ var notifier = new _notifier2.default();
 notifier.use('/api/event', function () {
   return (0, _data.getEvents)();
 });
+notifier.use('/api/sensor', function () {
+  return (0, _data.getSensors)();
+});
 notifier.use('/api/sensor/:id', function (param) {
   return (0, _data.getSensor)(param.id).then(function (result) {
     if (!result.sensor) {

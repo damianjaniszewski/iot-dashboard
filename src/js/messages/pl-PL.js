@@ -3,6 +3,8 @@ module.exports = {
   Dashboard: 'Pulpit',
   Logout: 'Wyloguj',
   Event: 'Komunikat',
+  EventD: 'Komunikatów',
   Sensor: 'Czujnik',
-  Sensors: 'Czujniki'
+  Sensors: 'Czujniki',
+  SensorsD: 'Czujników'
 };
