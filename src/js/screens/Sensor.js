@@ -15,7 +15,9 @@ import LinkPrevious from 'grommet/components/icons/base/LinkPrevious';
 import { getMessage } from 'grommet/utils/Intl';
 import CheckBox from 'grommet/components/CheckBox';
 import Paragraph from 'grommet/components/Paragraph';
-import GoogleMap from '../components/GoogleMap';
+// import GoogleMap from '../components/GoogleMap';
+import GoogleMapReact from 'google-map-react';
+import LocationIcon from 'grommet/components/icons/base/Location';
 
 import {
   loadSensor, unloadSensor
@@ -62,7 +64,9 @@ class Sensor extends Component {
             <Label margin='none'>Sensor Type: {sensor.sensorType}</Label>
           </Box>
           <Box align='start' pad={{horizontal: 'none', vertical: 'none'}} size={{height: 'medium', width: 'large'}}>
-            <GoogleMap center={{lat: sensor.sensorLat, lng: sensor.sensorLng}} zoom={12} options={{panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }} />
+            <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBJff6RhxRZZVV0P5Tdnl0y-h8BNQ6GBFs'}} center={[sensor.sensorLat, sensor.sensorLng]} zoom={12} options={{panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }}>
+              <LocationIcon lat={sensor.sensorLat} lng={sensor.sensorLng} size='large' colorIndex={sensor.sensorState == '0' ? 'brand' : 'accent-3'} />
+            </GoogleMapReact>
           </Box>
           <Box align='start' pad={{horizontal: 'none', vertical: 'none'}}>
             <Paragraph margin='none' size='medium'>

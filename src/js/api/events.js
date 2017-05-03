@@ -23,7 +23,7 @@ export function unwatchEvents() {
   }
 }
 
-const sensorWatcher = {};
+const sensorWatcher = [];
 
 export function watchSensor(id) {
   sensorWatcher[id] = socketWatcher.watch(`/api/sensor/${id}`);

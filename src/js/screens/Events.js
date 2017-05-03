@@ -57,7 +57,7 @@ class Events extends Component {
     } else {
       const eventsNode = (events || []).map((event, index) => (
         <TableRow key={index} justify='between' pad={{ horizontal: 'medium', vertical: 'none', between: 'small' }} separator='none'>
-            <td><Label margin='none' align='end'>{event.eventTime}</Label></td>
+            <td><Label margin='none' align='end'>{(new Date(event.eventTime)).getFullYear() +"-"+ ("0" + (new Date(event.eventTime)).getMonth()).slice(-2) +"-"+ ("0" + (new Date(event.eventTime)).getDate()).slice(-2) + " " + ("0" + (new Date(event.eventTime)).getHours()).slice(-2) + ":" + ("0" + (new Date(event.eventTime)).getMinutes()).slice(-2) + ":"  + ("0" + (new Date(event.eventTime)).getSeconds()).slice(-2)}</Label></td>
             <td><CheckBox checked={event.sensorState == '0' ? false : true} toggle={false} disabled={true} /></td>
             <td><Label margin='none'><Anchor path={`/sensor/${event.sensorId}`} label={event.sensorId} /></Label></td>
             <td><Label margin='none' align='end'>{event.sensorLat}</Label></td>
