@@ -3,7 +3,7 @@ module.exports = {
   Dashboard: 'Dashboard',
   Logout: 'Logout',
   Event: 'Event',
-  EventD: 'Events',
+  EventsD: 'Events',
   Sensor: 'Sensor',
   Sensors: 'Sensors',
   SensorsD: 'Sensors'
