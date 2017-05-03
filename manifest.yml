@@ -1,0 +1,33 @@
+applications:
+- name: iot-dashboard
+  memory: 128M
+  instances: 1
+  timeout: 30
+  stackato:
+    description: IoT Demo - Dashboard
+    autoscale:
+      enabled: true
+      instances:
+        min: 1
+        max: 8
+      cpu:
+        min: 40
+        max: 60
+    hooks:
+      pre-push:
+      - npm run dist
+    ignores:
+      - .babelrc
+      - .editorconfig
+      - .eslintignore
+      - .eslintrc
+      - .git
+      - .sass-lint.yml
+      - README.md
+      - __tests__
+      - public
+      - server
+      - src
+      - node_modules
+      - package.json.orig
+      - webpack.config.babel.js

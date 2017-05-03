@@ -1,0 +1,107 @@
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import Anchor from 'grommet/components/Anchor';
+import Article from 'grommet/components/Article';
+import Box from 'grommet/components/Box';
+import Header from 'grommet/components/Header';
+import Heading from 'grommet/components/Heading';
+import Label from 'grommet/components/Label';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
+import Notification from 'grommet/components/Notification';
+import Paragraph from 'grommet/components/Paragraph';
+// import Value from 'grommet/components/Value';
+// import Meter from 'grommet/components/Meter';
+import Spinning from 'grommet/components/icons/Spinning';
+import { getMessage } from 'grommet/utils/Intl';
+
+import NavControl from '../components/NavControl';
+import {
+  loadDashboard, unloadDashboard
+} from '../actions/dashboard';
+
+import { pageLoaded } from './utils';
+
+class Dashboard extends Component {
+
+  componentDidMount() {
+    pageLoaded('Dashboard');
+    this.props.dispatch(loadDashboard());
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(unloadDashboard());
+  }
+
+  render() {
+    const { error, events } = this.props;
+    const { intl } = this.context;
+
+    let errorNode;
+    let listNode;
+    if (error) {
+      errorNode = (
+        <Notification status='critical' size='large' state={error.message}
+          message='An unexpected error happened, please try again later' />
+      );
+    } else if (events.length === 0) {
+      listNode = (
+        <Box direction='row' responsive={false}
+          pad={{ between: 'small', horizontal: 'medium', vertical: 'medium' }}>
+          <Spinning /><span>Loading...</span>
+        </Box>
+      );
+    } else {
+      const eventsNode = (events || []).map((event, index) => (
+        <ListItem key={index} justify='between' pad={{ horizontal: 'medium', vertical: 'none', between: 'small' }} separator='none'>
+          <Box direction='row' responsive={false} pad={{ horizontal: 'none', vertical: 'none', between: 'small' }} margin='none'>
+            <Label pad='none' margin='none'>{event.eventTime}</Label>
+            <Label pad='none' margin='none'><Anchor path={`/sensor/${event.sensorId}`} label={event.sensorId} pad='none' /></Label>
+          </Box>
+          <Box direction='row' responsive={false} pad={{ horizontal: 'none', vertical: 'none', between: 'small' }} margin='none'>
+            <Label pad='none' margin='none'>{event.sensorState}</Label>
+            <Label pad='none' margin='none'>{event.sensorLat}</Label>
+            <Label pad='none' margin='none'>{event.sensorLng}</Label>
+          </Box>
+        </ListItem>
+      ));
+
+      listNode = (
+        <List>
+          {eventsNode}
+        </List>
+      );
+    }
+
+    return (
+      <Article primary={true}>
+        <Header direction='row' justify='between' size='large' pad={{ horizontal: 'medium', between: 'small' }}>
+          <NavControl name={getMessage(intl, 'Dashboard')} />
+        </Header>
+        {errorNode}
+        <Header direction='row' justify='between' size='large' pad={{ horizontal: 'medium', between: 'small' }}>
+          <NavControl name={getMessage(intl, 'Sensors')} />
+        </Header>
+        <Box pad='medium'>
+          <Heading tag='h3' strong={true}>Events</Heading>
+        </Box>
+        {listNode}
+      </Article>
+    );
+  }
+}
+
+Dashboard.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  error: PropTypes.object,
+  events: PropTypes.arrayOf(PropTypes.object)
+};
+
+Dashboard.contextTypes = {
+  intl: PropTypes.object
+};
+
+const select = state => ({ ...state.dashboard });
+
+export default connect(select)(Dashboard);
