@@ -58,12 +58,12 @@ class Sensor extends Component {
       );
     } else {
       sensorNode = (
-        <Box pad='medium'>
+        <Box direction='column' align='start' pad={{horizontal: 'medium', vertical: 'small'}} full='horizontal'>
           <Box align='start' pad={{horizontal: 'none', vertical: 'small'}}>
             <Heading tag='h3' strong={true} pad='none' margin='none'>ID: {sensor.sensorId}</Heading>
             <Label margin='none'>Sensor Type: {sensor.sensorType}</Label>
           </Box>
-          <Box align='start' pad={{horizontal: 'none', vertical: 'none'}} size={{height: 'medium', width: 'large'}}>
+          <Box align='start' pad={{horizontal: 'none', vertical: 'none'}} size={{height: 'medium', width: 'full'}} full='horizontal'>
             <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBJff6RhxRZZVV0P5Tdnl0y-h8BNQ6GBFs'}} center={[sensor.sensorLat, sensor.sensorLng]} zoom={12} options={{panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }}>
               <LocationIcon lat={sensor.sensorLat} lng={sensor.sensorLng} size='large' colorIndex={sensor.sensorState == '0' ? 'brand' : 'accent-3'} />
             </GoogleMapReact>
@@ -83,12 +83,7 @@ class Sensor extends Component {
     return (
       <Article primary={true} full={true}>
         <Header direction='row' size='large' colorIndex='light-2' align='center' responsive={false} pad={{ horizontal: 'small' }}>
-          <Anchor path='/dashboard'>
-            <LinkPrevious a11yTitle='Back to Dashboard' />
-          </Anchor>
-          <Heading margin='none' strong={true}>
-            { getMessage(intl, 'Sensor') }
-          </Heading>
+          <Anchor path='/dashboard'><LinkPrevious a11yTitle='Back to Dashboard' /></Anchor><Heading margin='none' tag='h3' strong={true}>{getMessage(intl, 'Sensor')}</Heading>
         </Header>
         {errorNode}
         {sensorNode}

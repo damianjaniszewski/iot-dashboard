@@ -99,7 +99,7 @@ class Dashboard extends Component {
     });
 
     const center = [latMin+((latMax-latMin)/2), lngMin+((lngMax-lngMin)/2)];
-    const zoom = this._getBoundsZoomLevel({lat: latMax, lng: lngMax}, {lat: latMin, lng: lngMin}, {width: 640, height: 240});
+    const zoom = this._getBoundsZoomLevel({lat: latMax, lng: lngMax}, {lat: latMin, lng: lngMin}, {width: 640, height: 480});
 
     let errorNode;
     let metersNode;
