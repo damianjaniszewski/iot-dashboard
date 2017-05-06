@@ -27,8 +27,8 @@ addNotifier(
   }
 );
 
-notifier.use('/api/event', () => getEvents());
-notifier.use('/api/sensor', () => getSensors());
+notifier.use('/api/events', () => getEvents());
+notifier.use('/api/sensors', () => getSensors());
 notifier.use('/api/sensor/:id', param => (
   getSensor(param.id).then((result) => {
     if (!result.sensor) {

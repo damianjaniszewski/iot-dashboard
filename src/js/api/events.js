@@ -13,7 +13,7 @@ const socketWatcher = new RequestWatcher({ webSocketUrl });
 let eventsWatcher;
 
 export function watchEvents() {
-  eventsWatcher = socketWatcher.watch('/api/event');
+  eventsWatcher = socketWatcher.watch('/api/events');
   return eventsWatcher;
 }
 
@@ -23,7 +23,7 @@ export function unwatchEvents() {
   }
 }
 
-const sensorWatcher = {};
+let sensorWatcher = {};
 
 export function watchSensor(id) {
   sensorWatcher[id] = socketWatcher.watch(`/api/sensor/${id}`);

@@ -87,14 +87,8 @@ class Dashboard extends Component {
 
     sensors.forEach((sensor) => {
       latMin = (!latMin || latMin > sensor.sensorLat) ? sensor.sensorLat : latMin;
-    });
-    sensors.forEach((sensor) => {
       lngMin = (!lngMin || lngMin > sensor.sensorLng) ? sensor.sensorLng : lngMin;
-    });
-    sensors.forEach((sensor) => {
       latMax = (!latMax || latMax < sensor.sensorLat) ? sensor.sensorLat : latMax;
-    });
-    sensors.forEach((sensor) => {
       lngMax = (!lngMax || lngMax < sensor.sensorLng) ? sensor.sensorLng : lngMax;
     });
 
@@ -129,7 +123,7 @@ class Dashboard extends Component {
       ));
 
       const mapNode = (sensors || []).map((sensor, index) => (
-        <LocationIcon lat={sensor.sensorLat} lng={sensor.sensorLng} size='large' colorIndex={sensor.sensorState == '0' ? 'brand' : 'accent-3'} />
+        <Anchor path={`/sensor/${sensor.sensorId}`} lat={sensor.sensorLat} lng={sensor.sensorLng}><LocationIcon size='large' colorIndex={sensor.sensorState == '0' ? 'brand' : 'accent-3'} /></Anchor>
       ));
 
       dashboardNode = (

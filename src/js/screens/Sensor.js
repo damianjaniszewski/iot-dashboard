@@ -60,8 +60,11 @@ class Sensor extends Component {
       sensorNode = (
         <Box direction='column' align='start' pad={{horizontal: 'medium', vertical: 'small'}} full='horizontal'>
           <Box align='start' pad={{horizontal: 'none', vertical: 'small'}}>
-            <Heading tag='h3' strong={true} pad='none' margin='none'>ID: {sensor.sensorId}</Heading>
+            <Heading tag='h3' strong={true} margin='none'>ID: {sensor.sensorId}</Heading>
             <Label margin='none'>Sensor Type: {sensor.sensorType}</Label>
+          </Box>
+          <Box align='start' pad={{horizontal: 'none', vertical: 'small'}}>
+            <CheckBox id='parkingBusy' checked={sensor.sensorState == '0' ? false : true} toggle={false} disabled={true} label='Parking Space Busy' />
           </Box>
           <Box align='start' pad={{horizontal: 'none', vertical: 'none'}} size={{height: 'medium', width: 'full'}} full='horizontal'>
             <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBJff6RhxRZZVV0P5Tdnl0y-h8BNQ6GBFs'}} center={[sensor.sensorLat, sensor.sensorLng]} zoom={12} options={{panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }}>
@@ -73,15 +76,12 @@ class Sensor extends Component {
               lat: {sensor.sensorLat} lng: {sensor.sensorLng}
             </Paragraph>
           </Box>
-          <Box align='start' pad={{horizontal: 'none', vertical: 'small'}}>
-            <CheckBox id='parkingBusy' checked={sensor.sensorState == '0' ? false : true} toggle={false} disabled={true} label='Parking Space Busy' />
-          </Box>
         </Box>
       );
     }
 
     return (
-      <Article primary={true} full={true}>
+      <Article primary={true}>
         <Header direction='row' size='large' colorIndex='light-2' align='center' responsive={false} pad={{ horizontal: 'small' }}>
           <Anchor path='/dashboard'><LinkPrevious a11yTitle='Back to Dashboard' /></Anchor><Heading margin='none' tag='h3' strong={true}>{getMessage(intl, 'Sensor')}</Heading>
         </Header>

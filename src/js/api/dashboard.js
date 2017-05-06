@@ -4,7 +4,7 @@ let dashboardWatcher;
 let sensorsWatcher;
 
 export function watchDashboard() {
-  dashboardWatcher = requestWatcher.watch('/api/event?sensorType=f0f4371a-9b18-4755-aa89-d5a7152e6525');
+  dashboardWatcher = requestWatcher.watch('/api/events?sensorType=f0f4371a-9b18-4755-aa89-d5a7152e6525');
   return dashboardWatcher;
 }
 
@@ -15,7 +15,7 @@ export function unwatchDashboard() {
 }
 
 export function watchSensors() {
-  sensorsWatcher = requestWatcher.watch('/api/sensor');
+  sensorsWatcher = requestWatcher.watch('/api/sensors');
   return sensorsWatcher;
 }
 

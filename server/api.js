@@ -19,11 +19,11 @@ router.post('/sessions', (req, res) => {
   }
 });
 
-router.get('/event', (req, res) => {
+router.get('/events', (req, res) => {
   getEvents(req.query).then(events => res.json(events));
 });
 
-router.get('/sensor', (req, res) => {
+router.get('/sensors', (req, res) => {
   getSensors(req.query).then(sensors => res.json(sensors));
 });
 
