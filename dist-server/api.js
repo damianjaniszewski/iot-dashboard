@@ -32,13 +32,13 @@ router.post('/sessions', function (req, res) {
   }
 });
 
-router.get('/event', function (req, res) {
+router.get('/events', function (req, res) {
   (0, _data.getEvents)(req.query).then(function (events) {
     return res.json(events);
   });
 });
 
-router.get('/sensor', function (req, res) {
+router.get('/sensors', function (req, res) {
   (0, _data.getSensors)(req.query).then(function (sensors) {
     return res.json(sensors);
   });

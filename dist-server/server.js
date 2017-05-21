@@ -55,10 +55,10 @@ var notifier = new _notifier2.default();
   });
 });
 
-notifier.use('/api/event', function () {
+notifier.use('/api/events', function () {
   return (0, _data.getEvents)();
 });
-notifier.use('/api/sensor', function () {
+notifier.use('/api/sensors', function () {
   return (0, _data.getSensors)();
 });
 notifier.use('/api/sensor/:id', function (param) {
