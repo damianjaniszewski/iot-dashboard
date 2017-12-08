@@ -32,7 +32,7 @@ import { pageLoaded } from './utils';
 
 class Dashboard extends Component {
 
-  constructor (props) {
+  constructor(props) {
     super(props);
     this._getBoundsZoomLevel = this._getBoundsZoomLevel.bind(this);
   }
@@ -53,13 +53,13 @@ class Dashboard extends Component {
     var ZOOM_MAX = 21;
 
     function latRad(lat) {
-        var sin = Math.sin(lat * Math.PI / 180);
-        var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
-        return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+      var sin = Math.sin(lat * Math.PI / 180);
+      var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+      return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
     }
 
     function zoom(mapPx, worldPx, fraction) {
-        return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+      return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
     }
 
     var latFraction = (latRad(ne.lat) - latRad(sw.lat)) / Math.PI;
@@ -92,8 +92,8 @@ class Dashboard extends Component {
       lngMax = (!lngMax || lngMax < sensor.sensorLng) ? sensor.sensorLng : lngMax;
     });
 
-    const center = [latMin+((latMax-latMin)/2), lngMin+((lngMax-lngMin)/2)];
-    const zoom = this._getBoundsZoomLevel({lat: latMax, lng: lngMax}, {lat: latMin, lng: lngMin}, {width: 640, height: 480});
+    const center = [latMin + ((latMax - latMin) / 2), lngMin + ((lngMax - lngMin) / 2)];
+    const zoom = this._getBoundsZoomLevel({ lat: latMax, lng: lngMax }, { lat: latMin, lng: lngMin }, { width: 640, height: 480 });
 
     let errorNode;
     let metersNode;
@@ -114,11 +114,11 @@ class Dashboard extends Component {
     } else {
       const sensorsNode = (sensors || []).map((sensor, index) => (
         <TableRow key={index} justify='between' pad={{ horizontal: 'medium', vertical: 'none', between: 'small' }} separator='none'>
-            <td><Label margin='none' align='end'>{(new Date(sensor.eventTime)).getFullYear() +"-"+ ("0" + (new Date(sensor.eventTime)).getMonth()).slice(-2) +"-"+ ("0" + (new Date(sensor.eventTime)).getDate()).slice(-2) + " " + ("0" + (new Date(sensor.eventTime)).getHours()).slice(-2) + ":" + ("0" + (new Date(sensor.eventTime)).getMinutes()).slice(-2) + ":"  + ("0" + (new Date(sensor.eventTime)).getSeconds()).slice(-2)}</Label></td>
-            <td><CheckBox checked={sensor.sensorState == '0' ? false : true} toggle={false} disabled={true} /></td>
-            <td><Label margin='none'><Anchor path={`/sensor/${sensor.sensorId}`} label={sensor.sensorId} /></Label></td>
-            <td><Label margin='none' align='end'>{sensor.sensorLat}</Label></td>
-            <td><Label margin='none' align='end'>{sensor.sensorLng}</Label></td>
+          <td><Label margin='none' align='end'>{(new Date(sensor.eventTime)).getFullYear() + "-" + ("0" + (new Date(sensor.eventTime)).getMonth()).slice(-2) + "-" + ("0" + (new Date(sensor.eventTime)).getDate()).slice(-2) + " " + ("0" + (new Date(sensor.eventTime)).getHours()).slice(-2) + ":" + ("0" + (new Date(sensor.eventTime)).getMinutes()).slice(-2) + ":" + ("0" + (new Date(sensor.eventTime)).getSeconds()).slice(-2)}</Label></td>
+          <td><CheckBox checked={sensor.sensorState == '0' ? false : true} toggle={false} disabled={true} /></td>
+          <td><Label margin='none'><Anchor path={`/sensor/${sensor.sensorId}`} label={sensor.sensorId} /></Label></td>
+          <td><Label margin='none' align='end'>{sensor.sensorLat}</Label></td>
+          <td><Label margin='none' align='end'>{sensor.sensorLng}</Label></td>
         </TableRow>
       ));
 
@@ -127,9 +127,9 @@ class Dashboard extends Component {
       ));
 
       dashboardNode = (
-        <Box direction='column' align='start' pad={{horizontal: 'medium', vertical: 'small'}} full='horizontal'>
-          <Box align='start' pad={{horizontal: 'none', vertical: 'none'}} size={{height: 'large', width: 'full'}} full='horizontal'>
-            <GoogleMapReact bootstrapURLKeys={{key: 'AIzaSyBJff6RhxRZZVV0P5Tdnl0y-h8BNQ6GBFs'}} center={center} zoom={zoom} options={{panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }}>
+        <Box direction='column' align='start' pad={{ horizontal: 'medium', vertical: 'small' }} full='horizontal'>
+          <Box align='start' pad={{ horizontal: 'none', vertical: 'none' }} size={{ height: 'large', width: 'full' }} full='horizontal'>
+            <GoogleMapReact bootstrapURLKeys={{ key: 'AIzaSyBJff6RhxRZZVV0P5Tdnl0y-h8BNQ6GBFs' }} center={center} zoom={zoom} options={{ panControl: false, mapTypeControl: false, draggable: false, disableDoubleClickZoom: true, scrollwheel: false }}>
               {mapNode}
             </GoogleMapReact>
           </Box>
@@ -146,9 +146,9 @@ class Dashboard extends Component {
     }
 
     metersNode = (
-      <Box direction='row' full='horizontal' align='stretch' pad={{horizontal: 'medium', vertical: 'small', between: 'small'}}>
-        <AnnotatedMeter type='circle' series={[{"label": "Free", "value": sensors.length - sensorsBusy.length, "colorIndex": "brand"}, {"label": "Busy", "value": sensorsBusy.length, "colorIndex": "accent-3"}]} units={getMessage(intl, 'SensorsD')} max={sensors.length} legend={false} />
-        <AnnotatedMeter type='circle' series={[{"label": "Free", "value": events.length - eventsBusy.length, "colorIndex": "brand"}, {"label": "Busy", "value": eventsBusy.length, "colorIndex": "accent-3"}]} units={getMessage(intl, 'EventsD')} max={events.length} legend={false} />
+      <Box direction='row' full='horizontal' align='stretch' pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}>
+        <AnnotatedMeter type='circle' series={[{ "label": "Free", "value": sensors.length - sensorsBusy.length, "colorIndex": "brand" }, { "label": "Busy", "value": sensorsBusy.length, "colorIndex": "accent-3" }]} units={getMessage(intl, 'SensorsD')} max={sensors.length} legend={false} />
+        <AnnotatedMeter type='circle' series={[{ "label": "Free", "value": events.length - eventsBusy.length, "colorIndex": "brand" }, { "label": "Busy", "value": eventsBusy.length, "colorIndex": "accent-3" }]} units={getMessage(intl, 'EventsD')} max={events.length} legend={false} />
       </Box>
     );
 
