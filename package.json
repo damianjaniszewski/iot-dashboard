@@ -15,7 +15,7 @@
     "start": "node ./dist-server/server.js"
   },
   "dependencies": {
-    "azure-event-hubs": "0.0.7",
+    "azure-event-hubs": "latest",
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
